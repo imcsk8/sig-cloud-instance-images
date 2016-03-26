@@ -6,6 +6,11 @@ LABEL name="CentOS Base Image"
 LABEL vendor="CentOS"
 LABEL license=GPLv2
 
+# Hacks for minimizing the image
+RUN rpm -e --nodeps cracklib-dicts
+RUN find /usr/share/i18n/charmaps/ -type f -not -name UTF-8.gz -not -name ISO-8859-1.gz | xargs rm -f
+RUN find /usr/share/i18n/locales -type f   -not -name en_US | xargs rm -f
+
 # Volumes for systemd
 # VOLUME ["/run", "/tmp"]
 
